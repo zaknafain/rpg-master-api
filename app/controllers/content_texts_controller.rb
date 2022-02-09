@@ -108,7 +108,7 @@ class ContentTextsController < ApplicationController
   end
 
   def filter_content(content_texts)
-    content_texts.select { |ct| ct.for_everyone? || ct.for_all_players? && player? || owner? || admin? }
+    content_texts.select { |ct| ct.for_everyone? || (ct.for_all_players? && player?) || owner? || admin? }
   end
 
   def content_params

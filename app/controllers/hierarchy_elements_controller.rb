@@ -85,7 +85,7 @@ class HierarchyElementsController < ApplicationController
   end
 
   def filter_elements(elements)
-    elements.select { |e| e.for_everyone? || e.for_all_players? && player? || owner? || admin? }
+    elements.select { |e| e.for_everyone? || (e.for_all_players? && player?) || owner? || admin? }
   end
 
   def hierarchable_type
