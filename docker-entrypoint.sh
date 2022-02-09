@@ -25,7 +25,7 @@ elif [ "$RAILS_ENV" = 'production' ]; then
 
   if [ "$1" = '' ]; then
       bundle exec rake db:create db:migrate
-      bundle exec puma -p "${PORT:-3000}" -e "${RAILS_ENV:-production}" -w "${WEB_CONCURRENCY:-1}" -t "${RAILS_MAX_THREADS:-1}:${RAILS_MAX_THREADS:-1}" --control tcp://127.0.0.1:9293 --control-token eMbYsDo76wujFQju
+      bundle exec puma -p "${PORT:-3000}" -e "${RAILS_ENV:-production}" -w "${WEB_CONCURRENCY:-1}" -t "${RAILS_MAX_THREADS:-1}:${RAILS_MAX_THREADS:-1}"
   else
     exec "$@" # Finally call command issued to the docker service (if any)
   fi
