@@ -10,7 +10,7 @@ class HierarchyElementsController < ApplicationController
   end
 
   def create
-    merged_params = element_params.merge(hierarchable_id: hierarchable_id, hierarchable_type: hierarchable_type)
+    merged_params = element_params.merge(hierarchable_id:, hierarchable_type:)
     new_element = hierarchable.hierarchy_elements.build(merged_params)
 
     if new_element.save

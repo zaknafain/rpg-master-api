@@ -124,7 +124,7 @@ RSpec.describe ContentTextsController do
     it 'creates new content' do
       request.headers.merge! auth_header(owner)
 
-      expect { post :create, params: params }.to change(ContentText, :count).by(1)
+      expect { post :create, params: }.to change(ContentText, :count).by(1)
 
       content = public_element.content_texts.order(created_at: :asc).last
       create_params.each do |key, value|
@@ -159,7 +159,7 @@ RSpec.describe ContentTextsController do
       params[:content_text][:content] = ''
       request.headers.merge! auth_header(owner)
 
-      expect { post :create, params: params }.not_to change(ContentText, :count)
+      expect { post :create, params: }.not_to change(ContentText, :count)
       expect(response.status).to eq(400)
     end
   end
@@ -342,9 +342,9 @@ RSpec.describe ContentTextsController do
       pu_player_content.content = ''
       pu_player_content.save(validate: false) # break it
 
-      expect { patch :reorder, params: params }.to_not change(pu_public_content,    :ordering)
-      expect { patch :reorder, params: params }.to_not change(pu_player_content,    :ordering)
-      expect { patch :reorder, params: params }.to_not change(pu_invisible_content, :ordering)
+      expect { patch :reorder, params: }.to_not change(pu_public_content,    :ordering)
+      expect { patch :reorder, params: }.to_not change(pu_player_content,    :ordering)
+      expect { patch :reorder, params: }.to_not change(pu_invisible_content, :ordering)
     end
 
     it 'does not allow to reorder content of another user' do

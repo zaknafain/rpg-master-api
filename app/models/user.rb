@@ -24,7 +24,7 @@ class User < ApplicationRecord
   before_save :downcase_email
 
   def to_token_payload
-    { sub: id, name: name }
+    { sub: id, name: }
   end
 
   def players

@@ -24,7 +24,7 @@ FactoryBot.define do
     trait :with_elements do
       hierarchy_elements do
         %i[author_only for_all_players for_everyone].map do |visibility|
-          association(:hierarchy_element, visibility: visibility)
+          association(:hierarchy_element, visibility:)
         end
       end
     end
@@ -36,7 +36,7 @@ FactoryBot.define do
     trait :with_content do
       hierarchy_elements do
         %i[author_only for_all_players for_everyone].map do |visibility|
-          association(:hierarchy_element, :with_content, visibility: visibility)
+          association(:hierarchy_element, :with_content, visibility:)
         end
       end
     end
@@ -52,7 +52,7 @@ FactoryBot.define do
     trait :with_content do
       content_texts do
         %i[author_only for_all_players for_everyone].map do |visibility|
-          association(:content_text, visibility: visibility)
+          association(:content_text, visibility:)
         end
       end
     end
