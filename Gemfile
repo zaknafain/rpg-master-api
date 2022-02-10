@@ -11,7 +11,7 @@ gem 'active_model_serializers', require: true
 gem 'bcrypt'
 gem 'knock'
 gem 'pg'
-gem 'puma', '~> 5.1.1'
+gem 'puma', '~> 5.6.1'
 gem 'rack-cors', require: 'rack/cors'
 gem 'rails'
 
@@ -24,9 +24,9 @@ group :development, :test do
   gem 'rspec_junit_formatter'
   gem 'rspec-rails'
   # Rubocop for linting
-  gem 'rubocop', '~> 1.7.0', require: false
-  gem 'rubocop-rails', '~> 2.9.0', require: false
-  gem 'rubocop-rspec', '~> 2.1.0', require: false
+  gem 'rubocop', '~> 1.25.0', require: false
+  gem 'rubocop-rails', '~> 2.13.0', require: false
+  gem 'rubocop-rspec', '~> 2.8.0', require: false
 end
 
 group :development do

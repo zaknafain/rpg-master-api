@@ -145,8 +145,7 @@ AllCops:
 
 Metrics/BlockLength:
   Enabled: true
-  Exclude:
-    - 'spec/**/*'
+  IgnoredMethods: ['namespace', 'describe', 'context', 'define']
 
 Rails/LexicallyScopedActionFilter:
   Enabled: false

@@ -1,11 +1,11 @@
-FROM ruby:3.1.0-alpine3.12
+FROM ruby:3.1.0-alpine3.15
 
 # Minimal requirements to run a Rails app
 RUN apk add --no-cache --update build-base=0.5-r2 \
-                                linux-headers=5.4.5-r1 \
-                                tzdata=2020c-r1 \
-                                postgresql-dev=12.5-r0 \
-                                libpq=12.5-r0
+                                linux-headers=5.10.41-r0 \
+                                tzdata=2021e-r0 \
+                                postgresql14-dev=14.1-r5 \
+                                libpq=14.1-r5
 
 ENV BUNDLE_PATH=/bundle/ruby-${RUBY_VERSION} \
     BUNDLE_BIN=/bundle/ruby-${RUBY_VERSION}/bin \
