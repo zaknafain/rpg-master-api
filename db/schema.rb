@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2016_12_28_212306) do
-
+ActiveRecord::Schema[7.0].define(version: 2016_12_28_212306) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -21,8 +20,8 @@ ActiveRecord::Schema.define(version: 2016_12_28_212306) do
     t.text "short_description"
     t.text "description", null: false
     t.boolean "is_public", default: false, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["user_id"], name: "index_campaigns_on_user_id"
   end
 
@@ -36,8 +35,8 @@ ActiveRecord::Schema.define(version: 2016_12_28_212306) do
     t.text "content", null: false
     t.integer "ordering"
     t.integer "visibility", default: 0, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.bigint "hierarchy_element_id"
     t.index ["hierarchy_element_id"], name: "index_content_texts_on_hierarchy_element_id"
     t.index ["visibility"], name: "index_content_texts_on_visibility"
@@ -55,8 +54,8 @@ ActiveRecord::Schema.define(version: 2016_12_28_212306) do
     t.string "name", null: false
     t.integer "visibility", default: 0, null: false
     t.text "description"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "hierarchable_type"
     t.bigint "hierarchable_id"
     t.index ["hierarchable_type", "hierarchable_id"], name: "index_hierachy_elements_on_hierarchable"
@@ -78,8 +77,8 @@ ActiveRecord::Schema.define(version: 2016_12_28_212306) do
     t.string "remember_token"
     t.string "locale", default: "en", null: false
     t.boolean "admin", default: false, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["remember_token"], name: "index_users_on_remember_token", unique: true
   end
