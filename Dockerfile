@@ -17,7 +17,7 @@ WORKDIR /rpg-master-api
 COPY Gemfile ./Gemfile
 COPY Gemfile.lock ./Gemfile.lock
 
-RUN gem install bundler:2.1.4
+RUN gem install bundler:2.3.3
 RUN bundle install
 
 EXPOSE 3000
