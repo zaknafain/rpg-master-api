@@ -137,7 +137,7 @@ RSpec.describe HierarchyElementsController do
     it 'creates a new element for the given filter' do
       request.headers.merge! auth_header(owner)
 
-      expect { post :create, params: params }.to change(HierarchyElement, :count).by(1)
+      expect { post :create, params: }.to change(HierarchyElement, :count).by(1)
 
       element = public_campaign.hierarchy_elements.order(created_at: :asc).last
       create_params.each do |key, value|
@@ -200,7 +200,7 @@ RSpec.describe HierarchyElementsController do
       params[:hierarchy_element][:name] = ''
       request.headers.merge! auth_header(owner)
 
-      expect { post :create, params: params }.not_to change(HierarchyElement, :count)
+      expect { post :create, params: }.not_to change(HierarchyElement, :count)
       expect(response.status).to eq(400)
     end
   end

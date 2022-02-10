@@ -24,7 +24,7 @@ describe User do
       foo@bar+baz.com
     ]
   end
-  let(:campaign)          { FactoryBot.create(:campaign, user: user) }
+  let(:campaign)          { FactoryBot.create(:campaign, user:) }
   let(:played_campaign)   { FactoryBot.create(:campaign, players: [user]) }
 
   describe 'validations' do
