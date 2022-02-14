@@ -105,7 +105,7 @@ GEM
     io-wait (0.2.1)
     jaro_winkler (1.5.4)
     jsonapi-renderer (0.2.2)
-    jwt (1.5.6)
+    jwt (2.3.0)
     kramdown (2.3.1)
       rexml
     kramdown-parser-gfm (1.1.0)
