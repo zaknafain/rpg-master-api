@@ -2,9 +2,9 @@
 
 # Controller for handling the users
 class UsersController < ApplicationController
-  before_action :authenticate_user, except: [:create]
-  before_action :authenticate_owner, only: [:update]
-  before_action :authenticate_admin, only: [:destroy]
+  before_action :authenticate_user!,  except: %i[sign_in create]
+  before_action :authenticate_owner,  only: [:update]
+  before_action :authenticate_admin!, only: [:destroy]
 
   def index
     render json: User.all
@@ -18,11 +18,21 @@ class UsersController < ApplicationController
     render json: current_user
   end
 
+  def sign_in
+    user_to_sign_in = User.find_by(email: sign_in_params[:email])
+
+    if user_to_sign_in&.authenticate(sign_in_params[:password])
+      render json: { jwt: encode_token(user_to_sign_in.to_token_payload) }, status: :created
+    else
+      head :bad_request
+    end
+  end
+
   def create
     new_user = User.create(user_params)
 
     if new_user.valid?
-      render json: Knock::AuthToken.new(payload: new_user.to_token_payload), status: :created
+      render json: { jwt: encode_token(new_user.to_token_payload) }, status: :created
     else
       head :bad_request
     end
@@ -57,8 +67,10 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(
-      :password, :password_confirmation, :email, :name, :locale
-    )
+    params.require(:user).permit(:password, :password_confirmation, :email, :name, :locale)
+  end
+
+  def sign_in_params
+    params.require(:auth).permit(:password, :email)
   end
 end

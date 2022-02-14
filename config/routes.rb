@@ -1,10 +1,9 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  post 'user_token' => 'user_token#create'
-
   resources :users, except: %i[new edit] do
-    get :me, on: :collection
+    get  :me,      on: :collection
+    post :sign_in, on: :collection
   end
 
   resources :campaigns, except: %i[new edit]

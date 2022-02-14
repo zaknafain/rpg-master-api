@@ -73,6 +73,73 @@ RSpec.describe UsersController do
     end
   end
 
+  describe 'POST sign_in' do
+    let(:user) do
+      FactoryBot.create(
+        :user,
+        email: 'foo@bar.com',
+        password: 'secret pee',
+        password_confirmation: 'secret pee'
+      )
+    end
+
+    it 'responds successfully' do
+      post :sign_in, params: {
+        auth: { email: user.email, password: 'secret pee' }
+      }
+
+      expect(response.status).to eq(201)
+    end
+
+    it 'responds with 400 if the user cannot be found' do
+      post :sign_in, params: {
+        auth: { email: 'wrong@mail.com', password: 'testtest' }
+      }
+
+      expect(response.status).to eq(400)
+    end
+
+    it 'responds with 400 if the user provides the wrong password' do
+      post :sign_in, params: {
+        auth: { email: user.email, password: 'testtest' }
+      }
+
+      expect(response.status).to eq(400)
+    end
+
+    it 'responds with a jwt' do
+      post :sign_in, params: {
+        auth: { email: user.email, password: 'secret pee' }
+      }
+
+      expect(response.body).to include('jwt')
+    end
+
+    it 'responds with a sub that equals the id' do
+      post :sign_in, params: {
+        auth: { email: user.email, password: 'secret pee' }
+      }
+
+      body = JSON.parse(response.body)
+      jwt = body['jwt']
+      decoded_jwt = decoded_token(jwt)
+
+      expect(decoded_jwt[0]).to include('sub' => user.id)
+    end
+
+    it 'responds with a user name and id' do
+      post :sign_in, params: {
+        auth: { email: user.email, password: 'secret pee' }
+      }
+
+      body = JSON.parse(response.body)
+      jwt = body['jwt']
+      decoded_jwt = decoded_token(jwt)
+
+      expect(decoded_jwt[0]).to include('name' => user.name)
+    end
+  end
+
   describe 'POST create' do
     let(:user_params) do
       { name: 'Created Name', email: 'new.email@created.de', password: 'password', password_confirmation: 'password' }
@@ -185,19 +252,19 @@ RSpec.describe UsersController do
   end
 
   describe 'DELETE destroy' do
-    it 'as normal user it returns not allowed' do
+    it 'as normal user it returns forbidden' do
       owner # init
       request.headers.merge! auth_header(user)
       delete :destroy, params: { id: owner.id }
 
-      expect(response.status).to eq(401)
+      expect(response.status).to eq(403)
     end
 
-    it 'as owner it returns not allowed' do
+    it 'as owner it returns forbidden' do
       request.headers.merge! auth_header(owner)
       delete :destroy, params: { id: owner.id }
 
-      expect(response.status).to eq(401)
+      expect(response.status).to eq(403)
     end
 
     it 'as admin it returns no content and destroys the user' do

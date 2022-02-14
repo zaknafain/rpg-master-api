@@ -2,7 +2,7 @@
 
 # Controller for handling Content
 class ContentTextsController < ApplicationController
-  before_action :authenticate_user, except: :index
+  before_action :authenticate_user!, except: :index
   before_action :authenticate_owner, except: :index
 
   def index

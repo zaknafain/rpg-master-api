@@ -2,7 +2,7 @@
 
 # Controller for handling Campaigns
 class CampaignsController < ApplicationController
-  before_action :authenticate_user, except: %i[index show]
+  before_action :authenticate_user!, except: %i[index show]
   before_action :authenticate_owner, only: %i[update destroy]
 
   def index

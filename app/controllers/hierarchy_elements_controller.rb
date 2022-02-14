@@ -2,7 +2,7 @@
 
 # Controller for handling the tree structure
 class HierarchyElementsController < ApplicationController
-  before_action :authenticate_user, except: :index
+  before_action :authenticate_user!, except: :index
   before_action :authenticate_owner, except: :index
 
   def index

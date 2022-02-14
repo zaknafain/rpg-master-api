@@ -9,7 +9,7 @@ end
 
 gem 'active_model_serializers', require: true
 gem 'bcrypt'
-gem 'knock'
+gem 'jwt'
 gem 'pg'
 gem 'puma', '~> 5.6.1'
 gem 'rack-cors', require: 'rack/cors'

@@ -79,7 +79,17 @@ RSpec::Matchers.define :of_correct_schema? do |name, owned_id, as_admin|
 end
 
 def auth_header(user)
-  token = Knock::AuthToken.new(payload: { sub: user.id, name: user.name }).token
+  token = auth_token(user)
 
   { 'Authorization' => "Bearer #{token}" }
+end
+
+def auth_token(user)
+  payload = user.to_token_payload
+
+  JWT.encode(payload, Rails.application.secrets.secret_key_base, 'HS256')
+end
+
+def decoded_token(token)
+  JWT.decode(token, Rails.application.secrets.secret_key_base, true, algorithm: 'HS256')
 end
