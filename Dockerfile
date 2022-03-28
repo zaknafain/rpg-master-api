@@ -1,4 +1,6 @@
-FROM ruby:3.1.1-alpine3.15
+ARG RUBY_VERSION=3.1.1
+
+FROM ruby:${RUBY_VERSION}-alpine3.15
 
 # Minimal requirements to run a Rails app
 RUN apk add --no-cache --update build-base=0.5-r2 \
@@ -17,8 +19,8 @@ WORKDIR /rpg-master-api
 COPY Gemfile ./Gemfile
 COPY Gemfile.lock ./Gemfile.lock
 
-RUN gem install bundler:2.3.3
-RUN bundle install
+RUN gem install bundler:2.3.3 && \
+    bundle install
 
 EXPOSE 3000
 
