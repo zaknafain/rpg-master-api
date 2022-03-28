@@ -5,9 +5,9 @@ FROM ruby:${RUBY_VERSION}-alpine3.15
 # Minimal requirements to run a Rails app
 RUN apk add --no-cache --update build-base=0.5-r2 \
                                 linux-headers=5.10.41-r0 \
-                                tzdata=2021e-r0 \
-                                postgresql14-dev=14.1-r5 \
-                                libpq=14.1-r5
+                                tzdata=2022a-r0 \
+                                postgresql14-dev=14.2-r0 \
+                                libpq=14.2-r0
 
 ENV BUNDLE_PATH=/bundle/ruby-${RUBY_VERSION} \
     BUNDLE_BIN=/bundle/ruby-${RUBY_VERSION}/bin \
@@ -19,7 +19,7 @@ WORKDIR /rpg-master-api
 COPY Gemfile ./Gemfile
 COPY Gemfile.lock ./Gemfile.lock
 
-RUN gem install bundler:2.3.3 && \
+RUN gem install bundler:2.3.10 && \
     bundle install
 
 EXPOSE 3000
