@@ -11,7 +11,7 @@ gem 'active_model_serializers', require: true
 gem 'bcrypt'
 gem 'jwt'
 gem 'pg'
-gem 'puma', '~> 5.6.1'
+gem 'puma', '~> 6.0.0'
 gem 'rack-cors', require: 'rack/cors'
 gem 'rails'
 
