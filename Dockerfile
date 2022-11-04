@@ -10,8 +10,8 @@ RUN apk update && \
       linux-headers~=5.16.7 \
       tzdata~=2022 \
       git~=2.36.3 \
-      postgresql14-dev~=14.2 \
-      libpq~=14.2
+      postgresql14-dev~=14 \
+      libpq~=14
 
 ENV BUNDLE_PATH=/bundle/ruby-${RUBY_VERSION} \
     BUNDLE_BIN=/bundle/ruby-${RUBY_VERSION}/bin \
