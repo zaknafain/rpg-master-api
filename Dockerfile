@@ -1,13 +1,17 @@
-ARG RUBY_VERSION=3.1.1
+ARG RUBY_VERSION=3.1.2
 
-FROM ruby:${RUBY_VERSION}-alpine3.15
+FROM ruby:${RUBY_VERSION}-alpine3.16 AS build
 
 # Minimal requirements to run a Rails app
-RUN apk add --no-cache --update build-base=0.5-r2 \
-                                linux-headers=5.10.41-r0 \
-                                tzdata=2022a-r0 \
-                                postgresql14-dev=14.2-r0 \
-                                libpq=14.2-r0
+
+RUN apk update && \
+    apk add --no-cache --update \
+      build-base~=0.5 \
+      linux-headers~=5.16.7 \
+      tzdata~=2022 \
+      git~=2.36.3 \
+      postgresql14-dev~=14.2 \
+      libpq~=14.2
 
 ENV BUNDLE_PATH=/bundle/ruby-${RUBY_VERSION} \
     BUNDLE_BIN=/bundle/ruby-${RUBY_VERSION}/bin \
@@ -19,10 +23,35 @@ WORKDIR /rpg-master-api
 COPY Gemfile ./Gemfile
 COPY Gemfile.lock ./Gemfile.lock
 
-RUN gem install bundler:2.3.10 && \
-    bundle install
+RUN gem install bundler:2.3.24
+
+FROM build AS production
 
 EXPOSE 3000
+
+RUN bundle config set --local without test development && \
+    bundle install
+
+COPY . .
+
+COPY docker-entrypoint.sh /opt/rpg-master-api/docker-entrypoint.sh
+ENTRYPOINT ["/opt/rpg-master-api/docker-entrypoint.sh"]
+
+FROM build AS test
+
+RUN bundle config set --local without development && \
+    bundle install
+
+COPY . .
+
+FROM build AS development
+
+EXPOSE 3000
+
+RUN bundle config set --local without test && \
+    bundle install
+
+COPY . .
 
 COPY docker-entrypoint.sh /opt/rpg-master-api/docker-entrypoint.sh
 ENTRYPOINT ["/opt/rpg-master-api/docker-entrypoint.sh"]
