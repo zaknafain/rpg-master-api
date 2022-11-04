@@ -228,8 +228,8 @@ GEM
       activesupport (>= 4.2.0)
       rack (>= 1.1)
       rubocop (>= 1.33.0, < 2.0)
-    rubocop-rspec (2.9.0)
-      rubocop (~> 1.19)
+    rubocop-rspec (2.14.2)
+      rubocop (~> 1.33)
     ruby-progressbar (1.11.0)
     solargraph (0.47.2)
       backport (~> 1.2)
@@ -282,7 +282,7 @@ DEPENDENCIES
   rspec_junit_formatter
   rubocop (~> 1.38.0)
   rubocop-rails (~> 2.17.2)
-  rubocop-rspec (~> 2.9.0)
+  rubocop-rspec (~> 2.14.2)
   solargraph
   spring
 
