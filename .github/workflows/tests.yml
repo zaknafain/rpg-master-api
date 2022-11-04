@@ -1,12 +1,11 @@
-name: Tests
+name: Tests & Linter
 
 on: [push]
 
 jobs:
-  test:
 
+  rspec:
     runs-on: ubuntu-latest
-
     services:
       postgres:
         image: postgres:9.6.18
@@ -19,7 +18,6 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
-
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
@@ -42,3 +40,15 @@ jobs:
         DB_USERNAME: test-user
         DB_PASSWORD: test-pass
       run: bundle exec rspec
+
+  rubocop:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        bundler-cache: true
+    - name: Run Rubocop
+      run: bundle exec rubocop
