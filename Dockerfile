@@ -9,7 +9,7 @@ RUN apk update && \
       build-base~=0.5 \
       linux-headers~=5.16.7 \
       tzdata~=2022 \
-      git~=2.36.3 \
+      git~=2.36 \
       postgresql14-dev~=14 \
       libpq~=14
 
