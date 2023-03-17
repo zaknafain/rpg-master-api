@@ -108,14 +108,14 @@ RSpec.describe ContentTextsController do
     let(:params) { { hierarchy_element_id: public_element.id, content_text: create_params } }
 
     it 'needs authentication' do
-      post :create, params: params
+      post(:create, params:)
 
       expect(response.status).to eq(401)
     end
 
     it 'returns status 201 and the created content' do
       request.headers.merge! auth_header(owner)
-      post :create, params: params
+      post(:create, params:)
 
       expect(response.status).to eq(201)
       expect(response.body).to of_correct_schema?(:content_text, owner.id, owner.admin?)
@@ -292,21 +292,21 @@ RSpec.describe ContentTextsController do
     end
 
     it 'needs authentication' do
-      patch :reorder, params: params
+      patch(:reorder, params:)
 
       expect(response.status).to eq(401)
     end
 
     it 'returns status 204' do
       request.headers.merge! auth_header(owner)
-      patch :reorder, params: params
+      patch(:reorder, params:)
 
       expect(response.status).to eq(204)
     end
 
     it 'updates the ordering of the contents' do
       request.headers.merge! auth_header(owner)
-      patch :reorder, params: params
+      patch(:reorder, params:)
 
       expect(pu_public_content.reload.ordering).to eq(0)
       expect(pu_player_content.reload.ordering).to eq(1)
@@ -323,7 +323,7 @@ RSpec.describe ContentTextsController do
     it 'returns 400 if there are wrong ids' do
       request.headers.merge! auth_header(owner)
       params[:content_text_order].push(pl_invisible_content.id)
-      patch :reorder, params: params
+      patch(:reorder, params:)
 
       expect(response.status).to eq(400)
     end
@@ -332,7 +332,7 @@ RSpec.describe ContentTextsController do
       request.headers.merge! auth_header(owner)
       pu_player_content.content = ''
       pu_player_content.save(validate: false) # break it
-      patch :reorder, params: params
+      patch(:reorder, params:)
 
       expect(response.status).to eq(400)
     end
@@ -349,7 +349,7 @@ RSpec.describe ContentTextsController do
 
     it 'does not allow to reorder content of another user' do
       request.headers.merge! auth_header(player)
-      patch :reorder, params: params
+      patch(:reorder, params:)
 
       expect(response.status).to eq(401)
     end
@@ -361,14 +361,14 @@ RSpec.describe ContentTextsController do
       }
 
       request.headers.merge! auth_header(user)
-      patch :reorder, params: params
+      patch(:reorder, params:)
 
       expect(response.status).to eq(404)
     end
 
     it 'does allow to reorder content for admins' do
       request.headers.merge! auth_header(admin)
-      patch :reorder, params: params
+      patch(:reorder, params:)
 
       expect(response.status).to eq(204)
     end
