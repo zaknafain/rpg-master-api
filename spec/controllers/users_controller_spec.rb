@@ -120,7 +120,7 @@ RSpec.describe UsersController do
         auth: { email: user.email, password: 'secret pee' }
       }
 
-      body = JSON.parse(response.body)
+      body = response.parsed_body
       jwt = body['jwt']
       decoded_jwt = decoded_token(jwt)
 
@@ -132,7 +132,7 @@ RSpec.describe UsersController do
         auth: { email: user.email, password: 'secret pee' }
       }
 
-      body = JSON.parse(response.body)
+      body = response.parsed_body
       jwt = body['jwt']
       decoded_jwt = decoded_token(jwt)
 
@@ -164,7 +164,7 @@ RSpec.describe UsersController do
 
       expect(response.body).to include('jwt')
 
-      body = JSON.parse(response.body)
+      body = response.parsed_body
       jwt = body['jwt']
       decoded_jwt = JWT.decode(
         jwt,
