@@ -121,14 +121,14 @@ RSpec.describe HierarchyElementsController do
     let(:params) { { hierarchy_element: create_params, filter: filter_params } }
 
     it 'needs authentication' do
-      post :create, params: params
+      post(:create, params:)
 
       expect(response.status).to eq(401)
     end
 
     it 'returns status 201 and the created element' do
       request.headers.merge! auth_header(owner)
-      post :create, params: params
+      post(:create, params:)
 
       expect(response.status).to eq(201)
       expect(response.body).to of_correct_schema?(:hierarchy_element, owner.id, owner.admin?)

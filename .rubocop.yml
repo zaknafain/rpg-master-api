@@ -141,7 +141,7 @@ AllCops:
   # is specified in the Gemfile or gems.rb file, RuboCop reads the final value
   # from the lock file.) If the Ruby version is still unresolved, RuboCop will
   # use the oldest officially supported Ruby version (currently Ruby 2.4).
-  TargetRubyVersion: 3.1
+  TargetRubyVersion: 3.2
 
 Metrics/BlockLength:
   Enabled: true
