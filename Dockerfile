@@ -1,4 +1,4 @@
-ARG RUBY_VERSION=3.2.1
+ARG RUBY_VERSION=3.2.2
 
 FROM ruby:${RUBY_VERSION}-alpine3.16 AS build
 
@@ -8,7 +8,7 @@ RUN apk update && \
     apk add --no-cache --update \
       build-base~=0.5 \
       linux-headers~=5.16.7 \
-      tzdata~=2022 \
+      tzdata~=2023 \
       git~=2.36 \
       postgresql14-dev~=14 \
       libpq~=14
