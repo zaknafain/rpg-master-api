@@ -60,7 +60,7 @@ end
 
 def assign_players
   puts 'Assign players'
-  Campaign.all.each do |campaign|
+  Campaign.find_each do |campaign|
     players = User.where.not(id: campaign.user_id).sample((0..5).to_a.sample)
     campaign.players = players
     campaign.save!
@@ -69,7 +69,7 @@ end
 
 def make_hierarchy_elements
   puts 'Create hierarchy elements'
-  Campaign.all.each do |campaign|
+  Campaign.find_each do |campaign|
     (0..10).to_a.sample.times do
       element = create_hierarchy_element!(campaign)
       (0..5).to_a.sample.times do
@@ -81,7 +81,7 @@ end
 
 def assign_element_readers
   puts 'Assign hierarchy element readers'
-  HierarchyElement.where(visibility: :for_some).each do |element|
+  HierarchyElement.where(visibility: :for_some).find_each do |element|
     players = element.players
     next if players.empty?
 
@@ -92,7 +92,7 @@ def assign_element_readers
 end
 
 def make_content_texts
-  HierarchyElement.all.each do |element|
+  HierarchyElement.find_each do |element|
     text_count = (0..10).to_a.sample
     text_count.times do
       create_content_text!(element)
@@ -102,7 +102,7 @@ end
 
 def assign_content_readers
   puts 'Assign content text readers'
-  ContentText.where(visibility: :for_some).each do |text|
+  ContentText.where(visibility: :for_some).find_each do |text|
     players = text.players
     next if players.empty?
 
