@@ -24,7 +24,7 @@ group :development, :test do
   gem 'rspec_junit_formatter'
   gem 'rspec-rails'
   # Rubocop for linting
-  gem 'rubocop', '~> 1.51.0', require: false
+  gem 'rubocop', '~> 1.59.0', require: false
   gem 'rubocop-rails', '~> 2.19.1', require: false
   gem 'rubocop-rspec', '~> 2.22.0', require: false
   gem 'solargraph'
