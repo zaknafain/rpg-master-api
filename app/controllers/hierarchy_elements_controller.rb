@@ -49,7 +49,7 @@ class HierarchyElementsController < ApplicationController
   end
 
   def player?
-    @player = campaign.players.select { |p| p.id == current_user&.id }.present? if @player.nil?
+    @player = campaign.players.any? { |p| p.id == current_user&.id } if @player.nil?
 
     @player
   end
