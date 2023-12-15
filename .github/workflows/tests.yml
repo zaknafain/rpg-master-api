@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     services:
       postgres:
-        image: postgres:9.6.18
+        image: postgres:15.5
         env:
           POSTGRES_USER: test-user
           POSTGRES_PASSWORD: test-pass
