@@ -1,17 +1,17 @@
 ARG RUBY_VERSION=3.2.2
 
-FROM ruby:${RUBY_VERSION}-alpine3.16 AS build
+FROM ruby:${RUBY_VERSION}-alpine3.19 AS build
 
 # Minimal requirements to run a Rails app
 
 RUN apk update && \
     apk add --no-cache --update \
       build-base~=0.5 \
-      linux-headers~=5.16.7 \
+      linux-headers~=6.5 \
       tzdata~=2023 \
-      git~=2.36 \
-      postgresql14-dev~=14 \
-      libpq~=14
+      git~=2.43 \
+      postgresql16-dev~=16 \
+      libpq~=16
 
 ENV BUNDLE_PATH=/bundle/ruby-${RUBY_VERSION} \
     BUNDLE_BIN=/bundle/ruby-${RUBY_VERSION}/bin \
