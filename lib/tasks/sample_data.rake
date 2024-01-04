@@ -19,7 +19,10 @@ end
 
 def make_minimalist_user
   puts 'Creating minimalist user'
-  create_user!(name: 'M', email: 'm@i.n', password: 'password', admin: true)
+  email    = ENV.fetch('ADMIN_EMAIL', 'm@i.n')
+  password = ENV.fetch('ADMIN_PASSWORD', 'password')
+
+  create_user!(name: 'M', email:, password:, admin: true)
 end
 
 def make_exorbitant_user
