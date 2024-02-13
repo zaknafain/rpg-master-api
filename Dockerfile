@@ -8,7 +8,7 @@ RUN apk update && \
     apk add --no-cache --update \
       build-base~=0.5 \
       linux-headers~=6.5 \
-      tzdata~=2023 \
+      tzdata~=2024 \
       git~=2.43 \
       postgresql16-dev~=16 \
       libpq~=16
