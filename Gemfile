@@ -26,7 +26,7 @@ group :development, :test do
   # Rubocop for linting
   gem 'rubocop', '~> 1.62.0', require: false
   gem 'rubocop-rails', '~> 2.23.0', require: false
-  gem 'rubocop-rspec', '~> 2.26.1', require: false
+  gem 'rubocop-rspec', '~> 2.27.1', require: false
   gem 'solargraph'
 end
 
